@@ -5,12 +5,14 @@ This guide provides practical instructions and optimized scripts for running Day
 ## 💻 System Requirements
 
 ### Minimum Specifications
+
 - **CPU:** 4 cores (Intel i5/i7 or AMD Ryzen 5/7)
 - **RAM:** 8 GB (16 GB recommended)
 - **Storage:** 100 GB free space
 - **OS:** Linux, macOS, or Windows (WSL2)
 
 ### Recommended Specifications
+
 - **CPU:** 8+ cores
 - **RAM:** 32 GB
 - **Storage:** 500 GB SSD
@@ -67,6 +69,7 @@ seqtk sample -s100 raw_R2.fastq.gz 1000000 | gzip > subset_R2.fastq.gz
 ### 3. Process Sequentially
 
 Avoid parallel processing to save memory:
+
 ```bash
 # Process one sample at a time
 for sample in sample1 sample2; do
@@ -119,9 +122,9 @@ echo "[2/4] Running Trimmomatic..."
 for R1 in ${INPUT_DIR}/*_R1.fastq.gz; do
     sample=$(basename ${R1} _R1.fastq.gz)
     R2="${INPUT_DIR}/${sample}_R2.fastq.gz"
-    
+
     echo "  Processing ${sample}..."
-    
+
     trimmomatic PE \
         -threads ${THREADS} \
         -phred33 \
@@ -187,17 +190,17 @@ echo "Using ${THREADS} CPU threads"
 for R1 in ${INPUT_DIR}/*_R1_paired.fastq.gz; do
     sample=$(basename ${R1} _R1_paired.fastq.gz)
     R2="${INPUT_DIR}/${sample}_R2_paired.fastq.gz"
-    
+
     echo ""
     echo "Profiling ${sample}..."
-    
+
     metaphlan \
         ${R1},${R2} \
         --input_type fastq \
         --nproc ${THREADS} \
         --bowtie2out ${OUTPUT_DIR}/metaphlan/bowtie2/${sample}.bt2.bz2 \
         --output_file ${OUTPUT_DIR}/metaphlan/${sample}_profile.txt
-    
+
     echo "  Complete: ${sample}"
 done
 
@@ -241,7 +244,7 @@ library(tidyr)
 # Read MetaPhlAn output
 cat("Reading taxonomic data...\n")
 data <- read.table("results/taxonomy/metaphlan/merged_species.txt",
-                   header=TRUE, sep="\t", row.names=1, 
+                   header=TRUE, sep="\t", row.names=1,
                    comment.char="", check.names=FALSE)
 
 # Clean species names (remove taxonomic prefixes)
@@ -346,16 +349,19 @@ rm -rf results/fastqc_raw/*_fastqc.zip
 ## 🎓 Learning Path
 
 ### Week 1: Basic QC
+
 - Run FastQC on tutorial data
 - Understand quality metrics
 - Practice trimming with different parameters
 
 ### Week 2: Small Dataset
+
 - Subsample real data (1M reads)
 - Complete full pipeline
 - Interpret results
 
 ### Week 3: Full Dataset
+
 - Process complete sample
 - Or move to cloud/HPC for larger datasets
 
@@ -364,16 +370,19 @@ rm -rf results/fastqc_raw/*_fastqc.zip
 ### Problem: Out of Memory
 
 **Solution 1:** Reduce thread count
+
 ```bash
 THREADS=2  # Use fewer threads
 ```
 
 **Solution 2:** Subsample data more aggressively
+
 ```bash
 seqtk sample -s100 input.fastq.gz 500000 > subset.fastq  # 500K reads
 ```
 
 **Solution 3:** Process one sample at a time
+
 ```bash
 # Don't run multiple tools simultaneously
 # Wait for each step to complete before starting next
@@ -382,6 +391,7 @@ seqtk sample -s100 input.fastq.gz 500000 > subset.fastq  # 500K reads
 ### Problem: Slow Performance
 
 **Solution:** Use faster tools
+
 ```bash
 # Use BBDuk instead of Trimmomatic (faster)
 # Use MetaPhlAn instead of Kaiju (lighter)
@@ -391,6 +401,7 @@ seqtk sample -s100 input.fastq.gz 500000 > subset.fastq  # 500K reads
 ### Problem: Database Downloads Failing
 
 **Solution:** Use pre-built databases
+
 ```bash
 # MetaPhlAn databases are downloaded automatically on first run
 # For Kraken2, use smaller pre-built databases:
@@ -400,29 +411,32 @@ tar -xzf minikraken2_v2_8GB_201904.tgz
 
 ## 📊 Expected Runtime (8GB RAM, 4 cores)
 
-| Step | 1M Read Pairs | 5M Read Pairs | 10M Read Pairs |
-|------|---------------|---------------|----------------|
-| FastQC | 5 min | 15 min | 30 min |
-| Trimmomatic | 10 min | 30 min | 1 hour |
-| MetaPhlAn | 30 min | 2 hours | 4 hours |
-| Visualization | 1 min | 2 min | 3 min |
-| **Total** | **~45 min** | **~3 hours** | **~5.5 hours** |
+| Step          | 1M Read Pairs | 5M Read Pairs | 10M Read Pairs |
+| ------------- | ------------- | ------------- | -------------- |
+| FastQC        | 5 min         | 15 min        | 30 min         |
+| Trimmomatic   | 10 min        | 30 min        | 1 hour         |
+| MetaPhlAn     | 30 min        | 2 hours       | 4 hours        |
+| Visualization | 1 min         | 2 min         | 3 min          |
+| **Total**     | **~45 min**   | **~3 hours**  | **~5.5 hours** |
 
 ## 🌟 Alternative: Cloud Options
 
 If your laptop struggles, consider:
 
 ### Google Colab (Free)
+
 - 12GB RAM, 2 CPU cores
 - Upload small datasets
 - Run basic QC and profiling
 
 ### AWS EC2 (Pay-as-you-go)
+
 - t3.xlarge: 4 cores, 16GB RAM (~$0.17/hour)
 - t3.2xlarge: 8 cores, 32GB RAM (~$0.33/hour)
 - Run for a few hours when needed
 
 ### Galaxy (Free)
+
 - Web-based, no installation
 - Pre-configured tools
 - Covered in Day 8
@@ -438,7 +452,7 @@ If your laptop struggles, consider:
 - [ ] Conda environment created and activated
 - [ ] Sample data in `raw_data/` directory
 - [ ] FastQC report shows good quality (>Q28)
-- [ ] >80% reads survive trimming
+- [ ] > 80% reads survive trimming
 - [ ] Taxonomic profile generated successfully
 - [ ] Visualization created without errors
 

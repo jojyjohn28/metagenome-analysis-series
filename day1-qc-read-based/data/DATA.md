@@ -4,7 +4,7 @@ This document provides information about datasets you can use to practice the Da
 
 ## 📊 Tutorial Datasets
 
-###  Public Metagenome Project (For Real Analysis)
+### Public Metagenome Project (For Real Analysis)
 
 **Project:** PRJNA432171  
 **Type:** Metagenomes, metatranscriptomes, and MAGs  
@@ -76,23 +76,23 @@ ACCESSIONS=(
 # Download and convert each sample
 for SRR in "${ACCESSIONS[@]}"; do
     echo "Downloading ${SRR}..."
-    
+
     # Download
     prefetch ${SRR}
-    
+
     # Convert to FASTQ (paired-end)
     fasterq-dump --split-files ${SRR}
-    
+
     # Compress
     gzip ${SRR}_1.fastq ${SRR}_2.fastq
-    
+
     # Rename for clarity (optional)
     mv ${SRR}_1.fastq.gz ${SRR}_R1.fastq.gz
     mv ${SRR}_2.fastq.gz ${SRR}_R2.fastq.gz
-    
+
     # Clean up cache
     rm -rf ${SRR}
-    
+
     echo "Completed ${SRR}"
 done
 
@@ -138,15 +138,15 @@ READS=1000000
 for R1 in large_dataset/*_R1.fastq.gz; do
     sample=$(basename ${R1} _R1.fastq.gz)
     R2="${sample}_R2.fastq.gz"
-    
+
     echo "Subsampling ${sample}..."
-    
+
     seqtk sample -s100 large_dataset/${sample}_R1.fastq.gz ${READS} | \
         gzip > raw_data/${sample}_R1.fastq.gz
-    
+
     seqtk sample -s100 large_dataset/${sample}_R2.fastq.gz ${READS} | \
         gzip > raw_data/${sample}_R2.fastq.gz
-    
+
     echo "Created: raw_data/${sample}_R[1-2].fastq.gz"
 done
 ```
@@ -156,6 +156,7 @@ done
 ### Expected File Format
 
 Your raw data should follow this naming convention:
+
 ```
 sample1_R1.fastq.gz  # Forward reads
 sample1_R2.fastq.gz  # Reverse reads
@@ -211,10 +212,10 @@ echo "Sample,Forward_Reads,Reverse_Reads"
 for R1 in raw_data/*_R1.fastq.gz; do
     sample=$(basename ${R1} _R1.fastq.gz)
     R2="raw_data/${sample}_R2.fastq.gz"
-    
+
     forward=$(zcat ${R1} | wc -l | awk '{print $1/4}')
     reverse=$(zcat ${R2} | wc -l | awk '{print $1/4}')
-    
+
     echo "${sample},${forward},${reverse}"
 done
 ```
@@ -226,10 +227,10 @@ done
 for R1 in raw_data/*_R1.fastq.gz; do
     sample=$(basename ${R1} _R1.fastq.gz)
     R2="raw_data/${sample}_R2.fastq.gz"
-    
+
     reads_R1=$(zcat ${R1} | wc -l | awk '{print $1/4}')
     reads_R2=$(zcat ${R2} | wc -l | awk '{print $1/4}')
-    
+
     if [ "$reads_R1" -eq "$reads_R2" ]; then
         echo "✓ ${sample}: ${reads_R1} paired reads"
     else
@@ -237,5 +238,3 @@ for R1 in raw_data/*_R1.fastq.gz; do
     fi
 done
 ```
-
-
