@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+#PBS -N megahit_body1
+#PBS -l select=1:ncpus=32:mem=750gb,walltime=168:00:00
+#PBS -q bigmem
+#PBS -m abe
+#PBS -M jojyj@clemson.edu
+#PBS -k oe
+
+module add gtdbtk/2.2.6
+
+cd /zfs/camplab/Jojy/darpa_working/data
+
+#gene calling(identify)
+gtdbtk identify --genome_dir path-to/genome_dir --out_dir path-to-out/identify --extension gz --cpus 32
+
+#Summarize the results
+cat path/identify/gtdbtk.ar53.markers_summary.tsv
+
+#Allighngenomes
+gtdbtk align --identify_dir path/identify --out_dir out-path/align --cpus 32
+
+#Classyfy the genome
+gtdbtk classify --genome_dir /zfs/camplab/Jojy/darpa_working/gtdbtk_oct2023/genome_dir --align_dir /zfs/camplab/Jojy/darpa_working/gtdbtk_oct2023/align --out_dir /zfs/camplab/Jojy/darpa_working/gtdbtk_oct2023/classify -x gz --cpus 32
+
+gtdbtk de_novo_wf --genome_dir /zfs/camplab/Jojy/darpa_working/drep-output_directory/dereplicated_genomes --out_dir path-to-out-direcory --extension fa --bacteria  --cpus 40 --outgroup_taxon p__Chloroflexota --skip_gtdb_refs --custom_taxonomy_file path-to-/Custom_taxonomy_file.csv
+
+
+gtdbtk convert_to_itol --input_tree  path-to/gtdbtk.bac120.decorated.tree --output_tree
+                             path-to/OUTPUT_TREE --debug -h

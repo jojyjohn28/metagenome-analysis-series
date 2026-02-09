@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+#PBS -N metawrap_binning
+#PBS -l select=1:ncpus=32:mem=1500gb,walltime=336:00:00
+#PBS -q bigmem
+#PBS -j oe
+#PBS -m abe
+#PBS -M jojyj@clemson.edumetawrap binning module
+
+module add dRep
+cd path to working directory
+dRep path/to/out/directory/ -g pathe/to/genomes/mags/*.fa
