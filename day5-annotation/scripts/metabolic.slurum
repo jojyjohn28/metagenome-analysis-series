@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH --job-name=METABOLIC
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=32
+#SBATCH --mem=750gb
+#SBATCH --time=96:00:00
+#SBATCH --output=metabolic_%j.out
+#SBATCH --error=metabolic_%j.err
+
+module load anaconda3/2020.07-gcc/8.4.1
+source activate METABOLIC_v4.0
+
+perl /project/bcampb7/camplab/software/METABOLIC/METABOLIC-C.pl \
+  -t 32 \
+  -m-cutoff 0.75 \
+  -in-gn /project/bcampb7/camplab/METABOLIC/renamed_MAGs_360_order_level \
+  -kofam-db full \
+  -r /project/bcampb7/camplab/METABOLIC/read_paths.txt \
+  -o /project/bcampb7/camplab/METABOLIC/mg_metabolic_360
+
