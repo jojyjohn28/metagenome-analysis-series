@@ -40,51 +40,16 @@ perl METABOLIC-G.pl -in-gn genomes/ -o metabolic_out -t 8
 
 See **[RUNNING_ON_LAPTOP.md](running-on-your-laptop/RUNNING_ON_LAPTOP.md)** for complete tutorial.
 
----
+
 
 ## 📁 Repository Structure
 
-```
 day5-annotation/
 ├── README.md                     # This file
 ├── running-on-your-laptop/
 │   └── RUNNING_ON_LAPTOP.md     # Complete laptop guide
 │
 └── scripts/ # HPC batch scripts
-
----
-
-## 🔄 Workflow
-
-```
-
-Dereplicated MAGs (from Day 4)
-↓
-┌─────────────────────────┐
-│ Gene Prediction │ Prodigal
-│ Find all genes │ (~1 min per genome)
-└─────────────────────────┘
-↓
-┌─────────────────────────┐
-│ Basic Annotation │ Prokka
-│ Quick functional ID │ (~5 min per genome)
-└─────────────────────────┘
-↓
-┌─────────────────────────┐
-│ Functional Annotation │ eggNOG-mapper
-│ KEGG, COG, GO, EC │ (~30 min per genome)
-└─────────────────────────┘
-↓
-┌─────────────────────────┐
-│ Metabolic Analysis │ DRAM or METABOLIC
-│ Pathways & capabilities │ (~1-2 hrs per genome)
-└─────────────────────────┘
-↓
-Fully Annotated Genomes + Metabolic Maps
-
-```
-
----
 
 
 ## 📖 Documentation
@@ -97,7 +62,7 @@ Fully Annotated Genomes + Metabolic Maps
 - [DRAM](https://github.com/WrightonLabCSU/DRAM)
 - [METABOLIC](https://github.com/AnantharamanLab/METABOLIC)
 
----
+
 
 ## ✅ Success Checklist
 
@@ -110,7 +75,7 @@ Before completing Day 5:
 - [ ] Comparative analysis completed
 - [ ] Results visualized
 
----
+
 
 ## 💡 Real-World Applications
 
@@ -123,7 +88,4 @@ Before completing Day 5:
 ✓ Does it have metal reduction capabilities?
 ✓ Can it degrade pollutants?
 
----
 
-
-```
