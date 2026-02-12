@@ -155,25 +155,26 @@ Explore specialized genomic features and secondary metabolites.
 
 ---
 
-### [Day 7: Downstream Analysis II - Comparative & Systems](day7-downstream-comparative/)
+### [Day 7: Comparative Genomics & Statistical Analysis](__day7-comparative-statistical/__)
 
-**Status:** 🚧 Coming Soon | **Time:** 6-8 hours
+**Status:** ✅ Complete | **Time:** 6-8 hours
 
-Compare genomes and reconstruct metabolic networks.
+Pangenomics, environmental associations, and co-occurrence networks.
 
 **Topics Covered:**
 
-- Pangenome analysis with Anvi'o
-- Metabolic network reconstruction
-- Pathway enrichment analysis
-- Statistical comparisons (LEfSe, ANCOM, DESeq2)
-- Co-metabolism network analysis
+- Pangenome analysis (PanX, Roary, BPGA, Anvi'o)
+- Statistical ecology (PERMANOVA, RDA, db-RDA)
+- Differential abundance (LEfSe, ANCOM)
+- Co-occurrence networks (SparCC, WGCNA)
+- Module-trait correlations & keystone species
 
 **Deliverables:**
 
-- Pangenome statistics
-- Metabolic networks
-- Comparative analysis reports
+- Core/accessory gene statistics
+- Environmental driver analysis
+- Species interaction networks
+- Biomarker identification
 
 ---
 

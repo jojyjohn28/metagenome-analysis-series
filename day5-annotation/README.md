@@ -40,17 +40,14 @@ perl METABOLIC-G.pl -in-gn genomes/ -o metabolic_out -t 8
 
 See **[RUNNING_ON_LAPTOP.md](running-on-your-laptop/RUNNING_ON_LAPTOP.md)** for complete tutorial.
 
-
-
 ## 📁 Repository Structure
 
 day5-annotation/
-├── README.md                     # This file
+├── README.md # This file
 ├── running-on-your-laptop/
-│   └── RUNNING_ON_LAPTOP.md     # Complete laptop guide
+│ └── RUNNING_ON_LAPTOP.md # Complete laptop guide
 │
 └── scripts/ # HPC batch scripts
-
 
 ## 📖 Documentation
 
@@ -61,8 +58,6 @@ day5-annotation/
 - [eggNOG-mapper](http://eggnog-mapper.embl.de/)
 - [DRAM](https://github.com/WrightonLabCSU/DRAM)
 - [METABOLIC](https://github.com/AnantharamanLab/METABOLIC)
-
-
 
 ## ✅ Success Checklist
 
@@ -75,8 +70,6 @@ Before completing Day 5:
 - [ ] Comparative analysis completed
 - [ ] Results visualized
 
-
-
 ## 💡 Real-World Applications
 
 **After annotation, you can answer:**
@@ -87,5 +80,3 @@ Before completing Day 5:
 ✓ Can it produce secondary metabolites?
 ✓ Does it have metal reduction capabilities?
 ✓ Can it degrade pollutants?
-
-
