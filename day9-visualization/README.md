@@ -112,6 +112,6 @@ Final figures can be exported to in Adobe Illustrator and refine it for publicat
 
 ## 📖 Documentation
 
-**Complete tutorial:** See blog post at [Day 8 Blog](https://jojyjohn28.github.io/blog/metagenome-analysis-day8-workflows-platforms/)
+**Complete tutorial:** See blog post at [Day 9 Blog](https://jojyjohn28.github.io/blog/metagenome-analysis-day9-visualization//)
 
 Last updated: February 2026
