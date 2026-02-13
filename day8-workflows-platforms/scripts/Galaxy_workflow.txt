@@ -1,0 +1,46 @@
+# Galaxy Metagenomics Workflow
+# Copy-paste commands for Galaxy web interface
+
+## Step 1: Upload Data
+- Click "Upload Data"
+- Choose FASTQ files
+- Format: fastqsanger.gz
+- Click "Start"
+
+## Step 2: Quality Control
+Tool: FastQC
+- Input: Your FASTQ files
+- Execute
+
+Tool: Trim Galore!
+- Reads 1: R1.fastq
+- Reads 2: R2.fastq
+- Execute
+
+## Step 3: Assembly
+Tool: MEGAHIT
+- Forward reads: trimmed_R1
+- Reverse reads: trimmed_R2
+- Minimum contig length: 1500
+- Execute
+
+## Step 4: Binning
+Tool: MetaBAT2
+- Assembly: contigs.fasta
+- BAM files: mapped_reads.bam
+- Minimum contig length: 2500
+- Execute
+
+## Step 5: Quality Check
+Tool: CheckM lineage_wf
+- Bins folder: MetaBAT2 bins
+- Execute
+
+## Step 6: Taxonomy
+Tool: GTDB-Tk classify
+- Bins: CheckM filtered bins
+- Execute
+
+## Step 7: Download Results
+- Click download icon
+- Save bins, taxonomy, stats
